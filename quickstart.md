@@ -10,4 +10,5 @@
 3. Start your node: `nearup guildnet --nodocker`
 4. Enter the wallet account created: `<account>.guildnet `
 5. Post your account name `<account>.guildnet` in the tokens channel and request tokens
-6. Stake directly to your node: `near stake <account>.guildnet <staking public key> <amount to stake>`
+6. Get the public key from validators_key.json: `cat ~/.near/guildnet/validator_key.json`
+7. Stake directly to your node: `near stake <account>.guildnet <staking public key> <amount to stake>`
