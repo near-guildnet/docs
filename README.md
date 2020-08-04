@@ -35,4 +35,3 @@ We also have servers running, to provide an easier experience:
 
 Use [quickstart.md](quickstart.md) to generate your GuildNet wallet and request for some tokens.
 Then, you can follow the [node_setup.md](node_setup.md) guide to setup your keys and your node, and become a validator on GuildNet!
-Refer to the json files in the folder [/ConfigFiles](/ConfigFiles) for the initial configuration of your node.
