@@ -1,14 +1,13 @@
 # GuildNet Account Creation
 
 ## Wallet Creation
-1. sudo apt install httpie
-2. near generate-key <your account name>.guildnet --networkId guildnet --helperAccount guildnet
-3. Copy public key and use with the next command
-4. http post http://164.90.144.140:3000/account newAccountId=<your account name>.guildnet newAccountPublicKey=<your generated public key>
+1. https://wallet.openshards.io
 
 
 ## Update your GuildNet node
-2. cat ~/.near-credentials/guildnet/<your account name>.json
-2. Update validator_key.json with your: Account Name, Public Key, and Private Key
-3. Delete the data director rm -R ~/.near/data
-4. Restart your node
+1. Install nearup (https://github.com/near-guildnet/nearup)
+2. Install near-shell (https://github.com/near-guildnet/near-shell)
+3. Start your node: nearup guildnet --nodocker
+4. Enter the wallet account created
+5. Post in the tokens channel and I will send tokens over
+6. Deploy the staking pool contract or stake directly to your node
