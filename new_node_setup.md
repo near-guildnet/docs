@@ -75,7 +75,7 @@ export NODE_ENV=guildnet
 ```
 Add (export NODE_ENV=guildnet) to the end of the ~/.bashrc file to ensure it persists system restarts.
 ```bash
-echo 'export NODE_ENV=betanet' >> ~/.bashrc 
+echo 'export NODE_ENV=guildnet' >> ~/.bashrc 
 ```
 
 ## Login through main wallet
