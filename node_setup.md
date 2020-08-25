@@ -24,13 +24,13 @@ At least 4GB RAM
 At least 100 GB free disk
 ```
 You can create a account on [vultr.com](https://www.vultr.com/?ref=8661389)     
-<img src="https://github.com/aquariusluo/Near/blob/master/images/gn-vultr-create.png" width="500">   
+<img src="https://github.com/aquariusluo/images/blob/master/gn-vultr-create.png" width="500">   
 
 Then deploy a new VPS on anywhere you prefer.  
-<img src="https://github.com/aquariusluo/Near/blob/master/images/gn-vultr-deploy.png" width="500">  
+<img src="https://github.com/aquariusluo/images/blob/master/gn-vultr-deploy.png" width="500">  
 
 You can see VPS details like this. and record your public IP and password.
-<img src="https://github.com/aquariusluo/Near/blob/master/images/gn-vultr-vps-detail.png" width="500">  
+<img src="https://github.com/aquariusluo/images/blob/master/gn-vultr-vps-detail.png" width="500">  
 
 ## Create a wallet account on Near guildnet
 You need a wallet account to hold your tokens operations, such as deposition, staking and withdrwa etc.  
