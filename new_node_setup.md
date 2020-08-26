@@ -180,13 +180,11 @@ near call pool.staketest.guildnet new '{"owner_id": "staketest.guildnet", "stake
 ```
 
 ## Delegate tokens and get rewards
-   * As a user, to deposit Near tokens
+   * As a user, to deposit and stake Near tokens
 ```bash
-near call <validator pool ID> deposit '{}' --accountId <main account ID> --amount <amount of Near tokens>
-near call <validator pool ID> stake '{"amount": "<YoctoNEAR amount>"}' --accountId  <main account ID>
+near call <validator pool ID> deposit_and_stake --amount <amount of Near tokens> --accountId <main account ID>
 example:
-near call pool.staketest.guildnet deposit '{}' --accountId staketest.guildnet --amount 75000
-near call pool.staketest.guildnet stake '{"amount": "75000000000000000000000000000"}' --accountId staketest.guildnet
+near call pool.staketest.guildnet deposit_and_stake --amount 70000 --accountId staketest.guildnet
 ```
   * To update current rewards:
 ```bash
