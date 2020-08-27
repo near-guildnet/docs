@@ -11,9 +11,8 @@ Futhermore, We'd like to get you contribution and bugfixing while going through 
 6.  [Install Nearup](#Install-Nearup)
 7.  [Launch validator node](#Launch-validator-node)
 8.  [Create staking pool](#Create-staking-pool)
-9.  [Deploy contract](#Deploy-contract)
-10. [Delegate tokens and get rewards](#Delegate-tokens-and-get-rewards)  
-11. [Monitor validator node status](#Monitor-validator-node-status)
+9. [Delegate tokens and get rewards](#Delegate-tokens-and-get-rewards)  
+10. [Monitor validator node status](#Monitor-validator-node-status)
 
 
 ## Create a VPS on vultr
@@ -152,33 +151,6 @@ near call stake.guildnet create_staking_pool '{"staking_pool_id": "<Pool ID need
 example:
 near call stake.guildnet create_staking_pool '{"staking_pool_id": "testpool", "owner_id": "staketest.guildnet", "stake_public_key": "ed25519:4x1LrkFvxnh8Aeh8NQc9cn15XuYAVHA2aN6WVhFfCdaE", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --accountId="blaze.guildnet" --amount=30 --gas=300000000000000
 ```
-
-## Deploy contract
-### Pre-requisites
-To develop Rust contracts you would need to:  
-   * Install Rustup:
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-   * Add wasm target to your toolchain: 
-```bash
-rustup target add wasm32-unknown-unknown
-```
-   * Pull Core contract from github and build the contract
-```bash
-git clone https://github.com/near/core-contracts.git
-cd core-contracts/staking-pool/
-./build.sh
-```
-### Deploy contract
-```bash
-near deploy --accountId=<validator pool ID> --wasmFile=core-contracts/staking-pool/res/staking_pool.wasm
-near call <validator pool ID> new '{"owner_id": "<main account ID>", "stake_public_key": "<pubilc key of validator pool>", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --account_id <main account ID>
-example:
-near deploy --accountId=testpool.stake.guildnet --wasmFile=core-contracts/staking-pool/res/staking_pool.wasm
-near call testpool.stake.guildnet new '{"owner_id": "staketest.guildnet", "stake_public_key": "<testpool.stake.guildnet pubilc key>", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --account_id staketest.guildnet
-```
-
 ## Delegate tokens and get rewards
    * As a user, to deposit and stake Near tokens
 ```bash
