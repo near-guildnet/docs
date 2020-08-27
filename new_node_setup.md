@@ -92,7 +92,7 @@ near login
 ```
 Subsequently, the browser will be opened and you need to restore main wallet account via Seed Phases. This action will autherize Near-cil access to main account.  
 ```
-We prompt to use staketest.guildnet as main account ID, pool.staketest.guildnet as pool ID below.
+We prompt to use staketest.guildnet as main account ID, testpool.stake.guildnet as pool ID below.
 ```
 Now, You can manage your main wallet account and smart contract by Near shell command. 
 ```bash
@@ -150,7 +150,7 @@ cat ~/.near/guildnet/validator_key.json | grep public_key
 ```bash
 near call stake.guildnet create_staking_pool '{"staking_pool_id": "<Pool ID need to be generated>", "owner_id": "<Master Account ID>", "stake_public_key": "<public_key in validator_key.json>", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --accountId="<Master Account ID>" --amount=30 --gas=300000000000000
 example:
-near call stake.guildnet create_staking_pool '{"staking_pool_id": "pool.staketest.guildnet", "owner_id": "staketest.guildnet", "stake_public_key": "ed25519:4x1LrkFvxnh8Aeh8NQc9cn15XuYAVHA2aN6WVhFfCdaE", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --accountId="blaze.guildnet" --amount=30 --gas=300000000000000
+near call stake.guildnet create_staking_pool '{"staking_pool_id": "testpool", "owner_id": "staketest.guildnet", "stake_public_key": "ed25519:4x1LrkFvxnh8Aeh8NQc9cn15XuYAVHA2aN6WVhFfCdaE", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --accountId="blaze.guildnet" --amount=30 --gas=300000000000000
 ```
 
 ## Deploy contract
@@ -175,8 +175,8 @@ cd core-contracts/staking-pool/
 near deploy --accountId=<validator pool ID> --wasmFile=core-contracts/staking-pool/res/staking_pool.wasm
 near call <validator pool ID> new '{"owner_id": "<main account ID>", "stake_public_key": "<pubilc key of validator pool>", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --account_id <main account ID>
 example:
-near deploy --accountId=pool.staketest.guildnet --wasmFile=core-contracts/staking-pool/res/staking_pool.wasm
-near call pool.staketest.guildnet new '{"owner_id": "staketest.guildnet", "stake_public_key": "<pool.staketest.guildnet pubilc key>", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --account_id staketest.guildnet
+near deploy --accountId=testpool.stake.guildnet --wasmFile=core-contracts/staking-pool/res/staking_pool.wasm
+near call testpool.stake.guildnet new '{"owner_id": "staketest.guildnet", "stake_public_key": "<testpool.stake.guildnet pubilc key>", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --account_id staketest.guildnet
 ```
 
 ## Delegate tokens and get rewards
@@ -184,27 +184,27 @@ near call pool.staketest.guildnet new '{"owner_id": "staketest.guildnet", "stake
 ```bash
 near call <validator pool ID> deposit_and_stake --amount <amount of Near tokens> --accountId <main account ID>
 example:
-near call pool.staketest.guildnet deposit_and_stake --amount 70000 --accountId staketest.guildnet
+near call testpool.stake.guildnet deposit_and_stake --amount 70000 --accountId staketest.guildnet
 ```
   * To update current rewards:
 ```bash
 near call <validator pool ID> ping '{}' --accountId <main account ID>
 example:
-near call pool.staketest.guildnet ping '{}' --accountId staketest.guildnet
+near call testpool.stake.guildnet ping '{}' --accountId staketest.guildnet
 ```
 ## Monitor validator node status
 To be a validator, you can execute Near-cli to monitor and manager validator pool by your main account.  
   * Check if your pool is in proposals at first.
 ```bash
-Near proposals | grep pool.staketest.guildnet
+Near proposals | grep testpool.stake.guildnet
 ```
   * Check if your pool is in current validators list.
 ```bash
-Near validators current | grep pool.staketest.guildnet
+Near validators current | grep testpool.stake.guildnet
 ```  
   * Check if your pool is in next validators list.
 ```bash
-Near validators next | grep pool.staketest.guildnet
+Near validators next | grep testpool.stake.guildnet
 ```    
   * Check validator seat price. if your staking Near tokens is not enough to get a seat. please participate in the following challenges to get more Near tokens.
 ```bash
