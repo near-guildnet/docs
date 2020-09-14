@@ -19,8 +19,8 @@ Futhermore, We'd like to get you contribution and bugfixing while going through 
 To become a validator, your validator node need to be create on VPS or your own machine. We recommand to create a VPS on vultr.com, which is easy to deploy & manage VPS and cost less. The minimum requirements of VPS is:
 ```bash
 At least 2-Core (4-Thread) Intel i7/Xeon equivalent
-At least 4GB RAM	At least 4GB RAM	At least 8GB RAM
-At least 100 GB free disk	At least 50 GB free disk	At least 100GB SSD (Note: HDD will not work)
+At least 16GB RAM
+At least 100GB SSD (Note: HDD will not work)
 ```
 You can create a account on [vultr.com](https://www.vultr.com/?ref=8661389)     
 <img src="https://github.com/aquariusluo/images/blob/master/gn-vultr-create.png" width="500">   
