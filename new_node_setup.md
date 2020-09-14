@@ -47,8 +47,12 @@ sudo apt install python3 git curl clang build-essential
 #### Install Node Version 12.x and npm
 Nodes.js and npm can be install by
 ```bash
+sudo apt install python3 git curl
+sudo apt install clang
+sudo apt install build-essential
 sudo apt install nodejs
 sudo apt install npm
+sudo npm install -g n
 sudo n stable
 PATH="$PATH"
 ```
