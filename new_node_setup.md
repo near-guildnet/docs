@@ -1,18 +1,18 @@
 # SETUP A GuildNet NODE
 This guide will help you setup a NEAR validator node on Guildnet. We provide step by step instructions to assist even those new to validating. 
-We'd appreciate your contribution and feedback on this guild.  
+We'd appreciate your contribution and feedback on this guide.  
 
 ## Content for setting up a node
 1.  [Server Requirements](#Server-Requirements)
-2.  [Create a wallet account on Near guildnet](#Create-a-wallet-account-on-Near-guildnet)
-3.  [Install Near-Shell](#Install-Near-Cli)
-4.  [Setting up your environment](#Setting-up-your-environment)
-5.  [Login through main wallet](#Login-through-main-wallet)
+2.  [Create a wallet](#Create-a-wallet-on-GuildNet)
+3.  [Install Near-Cli](#Install-Near-Cli)
+4.  [Setting up Environment](#Setting-up-your-environment)
+5.  [Authorize the Shell](#Authorize-The-Shell)
 6.  [Install Nearup](#Install-Nearup)
-7.  [Launch validator node](#Launch-validator-node)
-8.  [Create staking pool](#Create-staking-pool)
-9. [Delegate tokens and get rewards](#Delegate-tokens-and-get-rewards)  
-10. [Monitor validator node status](#Monitor-validator-node-status)
+7.  [Start the Validator](#Launch-validator-node)
+8.  [Create Staking Pool](#Create-staking-pool)
+9. [Delegate Tokens](#Delegate-tokens-and-get-rewards)  
+10. [Monitor Validator Status](#Monitor-validator-node-status)
 
 
 ## Server Requirements
@@ -22,7 +22,7 @@ At least 2-Core (4-Thread) Intel i7/Xeon equivalent
 At least 16GB RAM
 At least 100GB SSD (Note: HDD will not work)
 ```  
-## Create a wallet account on Near guildnet
+## Create a wallet on GuildNet
 You will need a wallet.  
 To create a [guildnet wallet](https://wallet.openshards.io) go to: [https://wallet.openshards.io](https://wallet.openshards.io) be sure to record your wallet address and seed phrase (12 words)  
 _Tip: You may request 75,000 faucet from Near team for staking test._  
@@ -72,16 +72,16 @@ Add (export NODE_ENV=guildnet) to the end of the ~/.bashrc file to ensure it per
 echo 'export NODE_ENV=guildnet' >> ~/.bashrc 
 ```
 
-## Login through main wallet
-To authorize Near-Cli access we need to login via the command prompt.
+## Authorize The Shell
+To authorize NEAR-Cli access we need to login via the command prompt.
 ```bash
 near login
 ```
-Subsequently, the browser will be opened, if it does not simply copy and paste the generated link into the browser. You may need to restore your wallet account via Seed Phase. This action will authorize Near-cli access to main account via the shell.  
+Subsequently, the browser will be opened, if it does not simply copy and paste the generated link into the browser. You may need to restore your wallet account via Seed Phase. This action will authorize NEAR-cli access to main account via the shell.  
 ```
 We recommend using <your account>.guildnet as main accountId and <your pool>.stake.guildnet as pool ID below.
 ```
-Now, You can manage your main wallet account and smart contract by Near shell command. 
+Now, You can manage your main wallet account and smart contract with the NEAR CLI. 
 ```bash
 For account:
   near login                                       # logging in through NEAR protocol wallet
@@ -140,9 +140,9 @@ example:
 near call stake.guildnet create_staking_pool '{"staking_pool_id": "testpool", "owner_id": "staketest.guildnet", "stake_public_key": "ed25519:4x1LrkFvxnh8Aeh8NQc9cn15XuYAVHA2aN6WVhFfCdaE", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --accountId="blaze.guildnet" --amount=30 --gas=300000000000000
 ```
 ## Delegate tokens and get rewards
-   * As a user, to deposit and stake Near tokens
+   * As a user, to deposit and stake NEAR tokens
 ```bash
-near call <validator pool ID> deposit_and_stake --amount <amount of Near tokens> --accountId <main account ID>
+near call <validator pool ID> deposit_and_stake --amount <amount of tokens> --accountId <main account ID>
 example:
 near call testpool.stake.guildnet deposit_and_stake --amount 70000 --accountId staketest.guildnet
 ```
@@ -156,17 +156,18 @@ near call testpool.stake.guildnet ping '{}' --accountId staketest.guildnet
 To be a validator, you can execute Near-cli to monitor and manager validator pool by your main account.  
   * Check if your pool is in proposals at first.
 ```bash
-Near proposals | grep testpool.stake.guildnet
+near proposals | grep testpool.stake.guildnet
 ```
   * Check if your pool is in current validators list.
 ```bash
-Near validators current | grep testpool.stake.guildnet
+near validators current | grep testpool.stake.guildnet
 ```  
   * Check if your pool is in next validators list.
 ```bash
-Near validators next | grep testpool.stake.guildnet
+near validators next | grep testpool.stake.guildnet
 ```    
-  * Check validator seat price. if your staking Near tokens is not enough to get a seat. please participate in the following challenges to get more Near tokens.
+  * Check the validator seat price.
 ```bash
 near validators current | grep "seat price"
-```  
+```
+If your stake is not enough to get a seat, please participate in the following challenges to get more tokens. (Coming Soon...)
