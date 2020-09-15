@@ -82,12 +82,10 @@ echo 'export NODE_ENV=guildnet' >> ~/.bashrc
 ```
 
 ## Login through main wallet
-To autherize Near-cil access to main wallet. we run at a command prompt to install ubuntu destop. Select [X]ubuntu destop option. 
+To authorize Near-Cli access we need to login via the command prompt.
 ```base
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get install tasksel -y
-sudo tasksel
 ```
 Open remote desktop and execute command
 ```bash
