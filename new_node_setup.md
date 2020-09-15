@@ -1,11 +1,11 @@
 # SETUP A GuildNet NODE
-We provide this guild to clarify how to setup a near validator node on Guildnet for anyone who is willing to practise near project, especially for validators on Virtual Private Server such as AWS or Vultr. We demonstrate step by step even if you're a newbie invloved in crypto-world with few experenice. 
-Futhermore, We'd like to get you contribution and bugfixing while going through this guild.  
+This guide will help you setup a NEAR validator node on Guildnet. We provide step by step instructions to assist even those new to validating. 
+We'd appreciate your contribution and feedback on this guild.  
 
 ## Content for setting up a node
-1.  [Create a VPS on vultr](#Create-a-VPS-on-vultr)
+1.  [Server Requirements](#Server-Requirements)
 2.  [Create a wallet account on Near guildnet](#Create-a-wallet-account-on-Near-guildnet)
-3.  [Install Near-Shell](#Install-Near-Shell)
+3.  [Install Near-Shell](#Install-Near-Cli)
 4.  [Setting up your environment](#Setting-up-your-environment)
 5.  [Login through main wallet](#Login-through-main-wallet)
 6.  [Install Nearup](#Install-Nearup)
@@ -15,31 +15,25 @@ Futhermore, We'd like to get you contribution and bugfixing while going through 
 10. [Monitor validator node status](#Monitor-validator-node-status)
 
 
-## Create a VPS on vultr
-To become a validator, your validator node need to be create on VPS or your own machine. We recommand to create a VPS on vultr.com, which is easy to deploy & manage VPS and cost less. The minimum requirements of VPS is:
+## Server Requirements
+To become a validator your server will need to meet these minimum requirements:
 ```bash
 At least 2-Core (4-Thread) Intel i7/Xeon equivalent
 At least 16GB RAM
 At least 100GB SSD (Note: HDD will not work)
-```
-You can create a account on [vultr.com](https://www.vultr.com/?ref=8661389)     
-<img src="https://github.com/aquariusluo/images/blob/master/gn-vultr-create.png" width="500">   
-
-Then deploy a new VPS on anywhere you prefer.  
-<img src="https://github.com/aquariusluo/images/blob/master/gn-vultr-deploy.png" width="500">  
-
-You can see VPS details like this. and record your public IP and password.
-<img src="https://github.com/aquariusluo/images/blob/master/gn-vultr-vps-detail.png" width="500">  
-
+```  
 ## Create a wallet account on Near guildnet
-You need a wallet account to hold your tokens operations, such as deposition, staking and withdrwa etc.  
-To create a [guildnet wallet](https://wallet.openshards.io) and record your wallet address and seed phrase (12 words)  
-_Tip: You may request 50,000 faucet from Near team for staking test._  
+You will need a wallet.  
+To create a [guildnet wallet](https://wallet.openshards.io) go to: [https://wallet.openshards.io](https://wallet.openshards.io) be sure to record your wallet address and seed phrase (12 words)  
+_Tip: You may request 75,000 faucet from Near team for staking test._  
 
-## Install Near-Shell
+## Install Near-Cli
 NEAR CLI is a Node.js application that relies on near-api-js to generate secure keys, connect to the NEAR platform and send transactions to the network on your behalf.  
 _note that Node.js version 10+ is required to run NEAR CLI_   
-Near-Shell doesn't need to be installed on the same machine as the validator, which is recommend to installed on a separate machine for increased security and performance. However it still can be installed on the same machine.
+
+
+**Near-Cli doesn't need to be installed on the same machine as the validator, which is recommend to installed on a separate machine for increased security and performance. However it still can be installed on the same machine.**
+
 ### Ubuntu Prerequisite Installation
 ```bash
 sudo apt install python3 git curl clang build-essential
@@ -47,9 +41,6 @@ sudo apt install python3 git curl clang build-essential
 #### Install Node Version 12.x and npm
 Nodes.js and npm can be install by
 ```bash
-sudo apt install python3 git curl
-sudo apt install clang
-sudo apt install build-essential
 sudo apt install nodejs
 sudo apt install npm
 sudo npm install -g n
@@ -83,17 +74,12 @@ echo 'export NODE_ENV=guildnet' >> ~/.bashrc
 
 ## Login through main wallet
 To authorize Near-Cli access we need to login via the command prompt.
-```base
-sudo apt-get update
-sudo apt-get upgrade -y
-```
-Open remote desktop and execute command
 ```bash
 near login
 ```
-Subsequently, the browser will be opened and you need to restore main wallet account via Seed Phases. This action will autherize Near-cil access to main account.  
+Subsequently, the browser will be opened, if it does not simply copy and paste the generated link into the browser. You may need to restore your wallet account via Seed Phase. This action will authorize Near-cli access to main account via the shell.  
 ```
-We prompt to use staketest.guildnet as main account ID, testpool.stake.guildnet as pool ID below.
+We recommend using <your account>.guildnet as main accountId and <your pool>.stake.guildnet as pool ID below.
 ```
 Now, You can manage your main wallet account and smart contract by Near shell command. 
 ```bash
@@ -127,7 +113,7 @@ curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-gui
 Nearup automatically adds itself to PATH: restart the terminal, or issue the command source ~/.profile. On each run, nearup self-updates to the latest version.  
 
 ## Launch validator node
-We recommand to use Officially Compiled Binary to lauch validator node, which is suitable to run on VPS.  
+We recommand to use Officially Compiled Binary to launch a validator node, which is suitable to run on VPS.  
 Then, input your staking pool ID in the prompt by this command. 
 ```bash
 nearup guildnet --nodocker
@@ -143,7 +129,7 @@ nearup logs -f
 ```
 
 ## Create staking pool
-You need a staking pool account to benefit stakers or yourself. which can be generated by create_staking_pool command. following this prompt.
+You need to setup a staking pool which can be generated by create_staking_pool command.
 Check public key from ~/.near/guildnet/validator_key.json
 ```bash
 cat ~/.near/guildnet/validator_key.json | grep public_key
