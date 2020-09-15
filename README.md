@@ -1,4 +1,4 @@
-# NEAR Free Shard Alliance
+# NEAR Open Shards Alliance (OSA)
 Quickstart guide
 
 Welcome to GuildNet! This initiative is completely unrelated with NEAR Foundation, and works thanks to the support of the most active node operators from NEAR Protocol community.
@@ -15,12 +15,9 @@ Why a new network?
 ## Repos
 
 We are using slightly-customized NEAR tooling, to allow them work on GuildNet:
-- [near-shell](https://github.com/near-guildnet/near-shell)
-- [near-wallet](https://github.com/near-guildnet/near-wallet)
 - [nearcore](https://github.com/near-guildnet/nearcore)
+- [near-cli](https://github.com/near-guildnet/near-cli)
 - [nearup](https://github.com/near-guildnet/nearup)
-- [near-contract-helper](https://github.com/near-guildnet/near-contract-helper)
-- [near-api-js](https://github.com/near-guildnet/near-api-js)
 
 If you plan to run your node (and applications) on GuildNet, keep an eye on these repos!
 
@@ -33,5 +30,6 @@ We also have servers running, to provide an easier experience:
 
 ## Docs
 
-Use [quickstart.md](quickstart.md) to generate your GuildNet wallet and request for some tokens.
-Then, you can follow the [node_setup.md](node_setup.md) guide to setup your keys and your node, and become a validator on GuildNet!
+- If you're familiar with NEAR use the [quickstart.md](quickstart.md) to generate your GuildNet wallet and request for some tokens.
+
+- New to NEAR or have a fresh server to setup checkout the [new_node_setup.md](new_node_setup.md) guide.
