@@ -47,6 +47,7 @@ sudo npm install -g n
 sudo n stable
 PATH="$PATH"
 ```
+
 #### Check Node.js and npm version  
 ```bash
 node -v
@@ -54,6 +55,10 @@ v12.18.3
 npm -v
 6.14.6
 ```
+
+##### Alternative
+If "n" is not working for you to upgrade node (node -v doesn't change) you can try [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) to manage node versions
+
 ### Install near-cli
 ```bash
 git clone https://github.com/near-guildnet/near-cli.git
