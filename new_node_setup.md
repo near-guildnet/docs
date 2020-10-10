@@ -4,15 +4,14 @@ We'd appreciate your contribution and feedback on this guide.
 
 ## Content for setting up a node
 1.  [Server Requirements](#Server-Requirements)
-2.  [Create a wallet](#Create-a-wallet-on-GuildNet)
-3.  [Install Near-Cli](#Install-Near-Cli)
-4.  [Setting up Environment](#Setting-up-your-environment)
-5.  [Authorize the Shell](#Authorize-The-Shell)
-6.  [Install Nearup](#Install-Nearup)
-7.  [Start the Validator](#Launch-validator-node)
-8.  [Create Staking Pool](#Create-staking-pool)
-9. [Delegate Tokens](#Delegate-tokens-and-get-rewards)  
-10. [Monitor Validator Status](#Monitor-validator-node-status)
+2.  [Launch validator node](#Launch-validator-node)
+3.  [Create a wallet](#Create-a-wallet-on-GuildNet)
+4.  [Install Near-Cli](#Install-Near-Cli)
+5.  [Setting up Environment](#Setting-up-your-environment)
+6.  [Authorize NEAR-Cli](#Authorize-NEAR-Cli)
+7.  [Create Staking Pool](#Create-staking-pool)
+8. [Delegate Tokens](#Delegate-tokens-and-get-rewards)  
+9. [Monitor Validator Status](#Monitor-validator-node-status)
 
 
 ## Server Requirements
@@ -22,22 +21,60 @@ At least 2-Core (4-Thread) Intel i7/Xeon equivalent
 At least 16GB RAM
 At least 100GB SSD (Note: HDD will not work)
 ```  
+
+You'll be working with two machines, a server for the validator node, and your personal machie/monitor machine to install near-cli, create the wallet, monitor and control the validator node.
+
+### Ubuntu Prerequisite Installation
+*On the Server:*
+
+```bash
+sudo apt install python3 git curl clang build-essential
+```
+
+## Launch validator node
+
+### Step 1. Install Nearup
+*On the Server:*
+The Prerequisite has python3, git and curl toolset, which have been installed in previous step. please run command prompt.
+```bash
+curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-guildnet/nearup/master/nearup | python3
+```
+Nearup automatically adds itself to PATH: **restart the terminal**, or issue the command: . ~/.profile. On each run, nearup self-updates to the latest version.  
+
+### Step 2. Choose a staking-pool AccountId
+On the first run, nearup will ask you to enter a staking-pool AccountId, please choose a name for your staking-pool AccountId, it must end with ".stake.guildnet", e.g. *MyStakingPool.stake.guildnet*. 
+
+You should go to [https://near-guildnet.github.io/staking-pool-factory](https://near-guildnet.github.io/staking-pool-factory/) to check if the name is available. Don't create your staking-pool contract yet, just check if the name is available.
+
+### Step 3. Start nearup guildnet
+We recommand to use Officially Compiled Binary to launch a validator node, which is suitable to run on VPS. Then, input your staking pool ID in the prompt by this command:
+```bash
+nearup guildnet --nodocker
+```
+
+Check validator_key.json is generated for staking pool.
+```bash
+ls ~/.near/guildnet
+validator_key.json  node_key.json  config.json  data  genesis.json
+cat ~/.near/guildnet/validator_key.json | grep public_key
+```
+Take note of the **validator public_key** 
+```json
+    "public_key": "ed25519:**TAKE-NOTE-OF-THIS**"
+```
+
+
+Check running status of validator node. If "V/" is showning up, your pool is selected in current validators list.
+```bash
+nearup logs -f
+```
+
 ## Create a wallet on GuildNet
+*On your personal machine:*
 You will need a wallet.  
 To create a [guildnet wallet](https://wallet.openshards.io) go to: [https://wallet.openshards.io](https://wallet.openshards.io) be sure to record your wallet address and seed phrase (12 words)  
 _Tip: You may request 75,000 faucet from Near team for staking test._  
 
-## Install Near-Cli
-NEAR CLI is a Node.js application that relies on near-api-js to generate secure keys, connect to the NEAR platform and send transactions to the network on your behalf.  
-_note that Node.js version 10+ is required to run NEAR CLI_   
-
-
-**Near-Cli doesn't need to be installed on the same machine as the validator, which is recommend to installed on a separate machine for increased security and performance. However it still can be installed on the same machine.**
-
-### Ubuntu Prerequisite Installation
-```bash
-sudo apt install python3 git curl clang build-essential
-```
 #### Install Node Version 12.x and npm
 Nodes.js and npm can be install by
 ```bash
@@ -59,12 +96,19 @@ npm -v
 ##### Alternative
 If "n" is not working for you to upgrade node (node -v doesn't change) you can try [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) to manage node versions
 
-### Install near-cli
+## Install Near-Cli
+*On your personal machine:*
+NEAR CLI is a Node.js application that relies on near-api-js to generate secure keys, connect to the NEAR platform and send transactions to the network on your behalf.  
+_note that Node.js version 10+ is required to run NEAR CLI_   
+
+**Note: You don't need to install Near-Cli on the server. We reccomend to install near-cli on your personal machine or a separate machine for increased security and performance. However it still can be installed on the same machine.**
+
+
+### Install the guild's near-cli
 ```bash
 git clone https://github.com/near-guildnet/near-cli.git
 cd near-cli
-# sudo may be needed.
-npm install -g
+sudo npm install -g
 ```
 ## Setting up your environment
 To use the guildnet network you need to update the environment via the command line.  
@@ -77,7 +121,7 @@ Add (export NODE_ENV=guildnet) to the end of the ~/.bashrc file to ensure it per
 echo 'export NODE_ENV=guildnet' >> ~/.bashrc 
 ```
 
-## Authorize The Shell
+## Authorize NEAR-Cli
 To authorize NEAR-Cli access we need to login via the command prompt.
 ```bash
 near login
@@ -110,32 +154,13 @@ check your public key file of main account.
 ls ~/.near-credentials/guildnet
 staketest.guildnet.json
 ```
-## Install Nearup
-The Prerequisite has python3, git and curl toolset, which have been installed in previous step. please run command prompt.
-```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-guildnet/nearup/master/nearup | python3
-```
-Nearup automatically adds itself to PATH: restart the terminal, or issue the command source ~/.profile. On each run, nearup self-updates to the latest version.  
 
-## Launch validator node
-We recommand to use Officially Compiled Binary to launch a validator node, which is suitable to run on VPS.  
-Then, input your staking pool ID in the prompt by this command. 
-```bash
-nearup guildnet --nodocker
-```
-Check validator_key.json is generated for staking pool.
-```bash
-ls ~/.near/guildnet
-validator_key.json  node_key.json  config.json  data  genesis.json
-```
-Check running status of validator node. If "V/" is showning up, your pool is selected in current validators list.
-```bash
-nearup logs -f
-```
+## Create your staking pool
+You need to setup a staking pool, the easiest way is to go back to [https://near-guildnet.github.io/staking-pool-factory/](https://near-guildnet.github.io/staking-pool-factory/) with the staking-pool AccountId you selected, and the **validator public_key** you got while starting nearup and complete the process to create the staking-pool contract.
 
-## Create staking pool
-You need to setup a staking pool which can be generated by create_staking_pool command.
-Check public key from ~/.near/guildnet/validator_key.json
+#### Alternative:
+You can also setup a staking pool from the command line using the *create_staking_pool* method.
+Check public key from ~/.near/guildnet/validator_key.json on your validator server:
 ```bash
 cat ~/.near/guildnet/validator_key.json | grep public_key
 ```
@@ -144,6 +169,7 @@ near call stake.guildnet create_staking_pool '{"staking_pool_id": "<Pool ID need
 example:
 near call stake.guildnet create_staking_pool '{"staking_pool_id": "testpool", "owner_id": "staketest.guildnet", "stake_public_key": "ed25519:4x1LrkFvxnh8Aeh8NQc9cn15XuYAVHA2aN6WVhFfCdaE", "reward_fee_fraction": {"numerator": 10, "denominator": 100}}' --accountId="blaze.guildnet" --amount=30 --gas=300000000000000
 ```
+
 ## Delegate tokens and get rewards
    * As a user, to deposit and stake NEAR tokens
 ```bash
