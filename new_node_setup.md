@@ -9,7 +9,7 @@ We'd appreciate your contribution and feedback on this guide.
 4.  [Install Near-Cli](#Install-Near-Cli)
 5.  [Setting up Environment](#Setting-up-your-environment)
 6.  [Authorize NEAR-Cli](#Authorize-NEAR-Cli)
-7.  [Create Staking Pool](#Create-staking-pool)
+7.  [Create Staking Pool](#Create-your-staking-pool)
 8. [Delegate Tokens](#Delegate-tokens-and-get-rewards)  
 9. [Monitor Validator Status](#Monitor-validator-node-status)
 
@@ -74,6 +74,8 @@ nearup logs -f
 You will need a wallet.  
 To create a [guildnet wallet](https://wallet.openshards.io) go to: [https://wallet.openshards.io](https://wallet.openshards.io) be sure to record your wallet address and seed phrase (12 words)  
 _Tip: You may request 75,000 faucet from Near team for staking test._  
+
+[GuildNet Faucet](https://near-guildnet.github.io/open-shards-faucet/)
 
 #### Install Node Version 12.x and npm
 Nodes.js and npm can be install by
