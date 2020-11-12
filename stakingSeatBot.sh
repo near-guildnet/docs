@@ -152,7 +152,8 @@ then
     echo "New Stake with Buffer: $NEW_STAKE_WITH_BUFFER"
     NEW_STAKE_FORMATTED=`printf "%d%024d\n", $NEW_STAKE_WITH_BUFFER`
     echo "New Stake Formatted: ${NEW_STAKE_FORMATTED:0:24}"
-    STAKE_CMD="near stake "$POOL_ID" "$PUBLIC_KEY" "${SEAT_PRICE_PROPOSALS}" --accountId "$ACCOUNT_ID""
+    #STAKE_CMD="near stake "$POOL_ID" "$PUBLIC_KEY" "${SEAT_PRICE_PROPOSALS}" --accountId "$ACCOUNT_ID""
+    STAKE_CMD="near call "$POOL_ID" stake '{\"amount\":"\"${SEAT_PRICE_PROPOSALS}\""}' --accountId "$ACCOUNT_ID""
     echo "Stake CMD: $STAKE_CMD"
     STAKE=`$STAKE_CMD`
     echo "Stake updated $STAKE"
@@ -168,7 +169,8 @@ then
     echo "New Stake with Buffer: $NEW_STAKE_WITH_BUFFER"
     NEW_STAKE_FORMATTED=`printf "%d%024d\n", $NEW_STAKE_WITH_BUFFER`
     echo "New Stake Formatted: ${NEW_STAKE_FORMATTED:0:24}"
-    STAKE_CMD="near stake "$POOL_ID" "$PUBLIC_KEY" "${SEAT_PRICE_PROPOSALS}" --accountId "$ACCOUNT_ID""
+    #STAKE_CMD="near stake "$POOL_ID" "$PUBLIC_KEY" "${SEAT_PRICE_PROPOSALS}" --accountId "$ACCOUNT_ID""
+    STAKE_CMD="near call "$POOL_ID" stake '{\"amount\":"\"${SEAT_PRICE_PROPOSALS}\""}' --accountId "$ACCOUNT_ID""
     echo "Stake CMD: $STAKE_CMD"
     STAKE=`$STAKE_CMD`
     echo "Stake updated $STAKE"
@@ -183,7 +185,8 @@ then
   echo "New Stake with Buffer: $NEW_STAKE_WITH_BUFFER"
   NEW_STAKE_FORMATTED=`printf "%d%024d\n", $NEW_STAKE_WITH_BUFFER`
   echo "New Stake Formatted: ${NEW_STAKE_FORMATTED:0:24}"
-  STAKE_CMD="near stake "$POOL_ID" "$PUBLIC_KEY" "${SEAT_PRICE_PROPOSALS}" --accountId "$ACCOUNT_ID""
+  #STAKE_CMD="near stake "$POOL_ID" "$PUBLIC_KEY" "${SEAT_PRICE_PROPOSALS}" --accountId "$ACCOUNT_ID""
+  STAKE_CMD="near call "$POOL_ID" unstake '{\"amount\":"\"${SEAT_PRICE_PROPOSALS}\""}' --accountId "$ACCOUNT_ID""
   echo "Stake CMD: $STAKE_CMD"
   STAKE=`$STAKE_CMD`
   echo "Stake updated $STAKE"
