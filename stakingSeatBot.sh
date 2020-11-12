@@ -136,7 +136,7 @@ then
     SEAT_PRICE_DIFF=$((SEAT_PRICE_NEXT - CURRENT_STAKE))
     echo "Seat Price Diff: $SEAT_PRICE_DIFF"
     echo "New Stake: $SEAT_PRICE_PROPOSALS"
-    STAKE_CMD="near stake "$ACCOUNT_ID" "$PUBLIC_KEY" "${SEAT_PRICE_PROPOSALS}""
+    STAKE_CMD="near call "$POOL_ID" stake '{\"amount\":"\"${SEAT_PRICE_DIFF}\""}' --accountId "$ACCOUNT_ID""
     echo "Stake CMD: $STAKE_CMD"
     STAKE=`$STAKE_CMD`
     echo "Stake updated $STAKE"
@@ -144,7 +144,7 @@ then
   elif [[ "$CURRENT_STAKE" -le "$SEAT_PRICE_PROPOSALS" && "$PROPOSAL_STAKE" -le "$SEAT_PRICE_PROPOSALS" ]]
   then
     echo "$SEAT_PRICE_NEXT  $CURRENT_STAKE $SEAT_PRICE_BUFFER"
-   SEAT_PRICE_DIFF=$((SEAT_PRICE_NEXT - CURRENT_STAKE))
+    SEAT_PRICE_DIFF=$((SEAT_PRICE_NEXT - CURRENT_STAKE))
     echo "Seat Price Diff: $SEAT_PRICE_DIFF"
     NEW_STAKE=$((CURRENT_STAKE + SEAT_PRICE_DIFF))
     echo "New Stake: $NEW_STAKE"
@@ -153,7 +153,7 @@ then
     NEW_STAKE_FORMATTED=`printf "%d%024d\n", $NEW_STAKE_WITH_BUFFER`
     echo "New Stake Formatted: ${NEW_STAKE_FORMATTED:0:24}"
     #STAKE_CMD="near stake "$POOL_ID" "$PUBLIC_KEY" "${SEAT_PRICE_PROPOSALS}" --accountId "$ACCOUNT_ID""
-    STAKE_CMD="near call "$POOL_ID" stake '{\"amount\":"\"${SEAT_PRICE_PROPOSALS}\""}' --accountId "$ACCOUNT_ID""
+    STAKE_CMD="near call "$POOL_ID" stake '{\"amount\":"\"${NEW_STAKE_FORMATTED:0:24}\""}' --accountId "$ACCOUNT_ID""
     echo "Stake CMD: $STAKE_CMD"
     STAKE=`$STAKE_CMD`
     echo "Stake updated $STAKE"
