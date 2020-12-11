@@ -25,32 +25,89 @@ At least 100GB SSD (Note: HDD will not work)
 You'll be working with two machines, a server for the validator node, and your personal machie/monitor machine to install near-cli, create the wallet, monitor and control the validator node.
 
 ### Ubuntu Prerequisite Installation
-*On the Server:*
+
+*To use Nearup On the Server:*
 
 ```bash
-sudo apt install python3 git curl clang build-essential
+sudo apt install python3 git curl
+```
+
+*To use Compile Script and Systemd:*
+```bash
+sudo apt install python3 git curl snapd
 ```
 
 ## Launch validator node
 
-### Step 1. Install Nearup
-*On the Server:*
-The Prerequisite has python3, git and curl toolset, which have been installed in previous step. please run command prompt.
-```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-guildnet/nearup/master/nearup | python3
-```
-Nearup automatically adds itself to PATH: **restart the terminal**, or issue the command: . ~/.profile. On each run, nearup self-updates to the latest version.  
+### Step 1. Install nearcore on Host
 
-### Step 2. Choose a staking-pool AccountId
+- There are 2 ways to install nearcore currently. You can use Nearup or you can compile the source and use systemd to manage it.
+
+### Option 1 - Use Nearup
+
+- **Step 1.Install Nearup**
+
+On the Server: The Prerequisite has python3, git and curl toolset, which have been installed in previous step. please run command prompt.
+
+curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-guildnet/nearup/master/nearup | python3
+Nearup automatically adds itself to PATH: restart the terminal, or issue the command: . ~/.profile. On each run, nearup self-updates to the latest version.
+
+- **Step 2. Choose a staking-pool AccountId**
+
 On the first run, nearup will ask you to enter a staking-pool AccountId, please choose a name for your staking-pool AccountId, it must end with ".stake.guildnet", e.g. *MyStakingPool.stake.guildnet*. 
 
 You should go to [https://near-guildnet.github.io/staking-pool-factory](https://near-guildnet.github.io/staking-pool-factory/) to check if the name is available. Don't create your staking-pool contract yet, just check if the name is available.
 
-### Step 3. Start nearup guildnet
+- **Step 3. Start nearup guildnet**
+
 We recommand to use Officially Compiled Binary to launch a validator node, which is suitable to run on VPS. Then, input your staking pool ID in the prompt by this command:
 ```bash
 nearup guildnet --nodocker
+
 ```
+
+### Option 2 - Compile from source and Use Systemd
+
+- **Step 1** Compile the code - Install The Service
+```
+wget https://raw.githubusercontent.com/crypto-guys/near-guildnet/main/nearcore/install/install.sh
+chmod +x install.sh
+sudo ./install.sh
+```
+- **Systemd Usage**
+
+- Enabling the service on boot
+```
+sudo systemctl enable neard.service
+sudo systemctl disable neard.service
+```
+
+- Start, Stop, Get Status 
+```
+sudo systemctl start neard.service
+
+sudo systemctl stop neard.service
+
+sudo systemctl status neard.service
+```
+- Check the validators log. 
+- **Please note:** By default logs go to the system journal 
+- This is controlled by the file /usr/lib/systemd/journald.conf.d/neard.conf 
+
+To output logs to the specified file and append data uncomment this line from /usr/lib/systemd/neard.service  
+```
+#StandardOutput=append:/var/log/guildnet.log
+```
+
+- Check the logs
+```
+sudo journalctl -x -u neard
+```
+For more information on using journalctl use this command 
+
+```journalctl --help```
+
+## Verify your install
 
 Check validator_key.json is generated for staking pool.
 ```bash
@@ -77,27 +134,6 @@ _Tip: You may request 75,000 faucet from Near team for staking test._
 
 [GuildNet Faucet](https://near-guildnet.github.io/open-shards-faucet/)
 
-#### Install Node Version 12.x and npm
-Nodes.js and npm can be install by
-```bash
-sudo apt install nodejs
-sudo apt install npm
-sudo npm install -g n
-sudo n stable
-PATH="$PATH"
-```
-
-#### Check Node.js and npm version  
-```bash
-node -v
-v12.18.3
-npm -v
-6.14.6
-```
-
-##### Alternative
-If "n" is not working for you to upgrade node (node -v doesn't change) you can try [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) to manage node versions
-
 ## Install Near-Cli
 *On your personal machine:*
 NEAR CLI is a Node.js application that relies on near-api-js to generate secure keys, connect to the NEAR platform and send transactions to the network on your behalf.  
@@ -105,11 +141,28 @@ _note that Node.js version 10+ is required to run NEAR CLI_
 
 **Note: You don't need to install Near-Cli on the server. We reccomend to install near-cli on your personal machine or a separate machine for increased security and performance. However it still can be installed on the same machine.**
 
+#### Install Node Version 15.x and npm
+Nodes.js and npm can be install by
+```bash
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt install build-essential nodejs
+PATH="$PATH"
+```
+
+#### Check Node.js and npm version  
+```bash
+node -v
+    v14.X.X
+npm -v
+    6.14.8
+
+```
 
 ### Install the guild's near-cli
 ```bash
-git clone https://github.com/near-guildnet/near-cli.git
-cd near-cli
+git clone https://github.com/crypto-guys/near-cli.git 
+cd near-cli/
+npm install
 sudo npm install -g
 ```
 ## Setting up your environment
