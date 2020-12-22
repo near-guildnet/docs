@@ -43,7 +43,7 @@ sudo apt install python3 git curl snapd
 
 - There are 2 ways to install nearcore currently. You can use Nearup or you can compile the source and use systemd to manage it.
 
-### Option 1 - Use Nearup
+## Installation Option 1 - Use Nearup
 
 - **Step 1.Install Nearup**
 
@@ -82,11 +82,9 @@ Check running status of validator node. If "V/" is showning up, your pool is sel
 nearup logs -f
 ```
 
-### Option 2 - Compile from source and Use Systemd
+## Installation Option 2 - Compile from source and Use Systemd
 
-- **First: Compile the code and Install The Service **
-
-This bash script will automatically compile nearcore and install the service. [README.md](https://github.com/solutions-crypto/nearcore-autocompile/blob/main/README.md)
+This bash script will automatically compile nearcore and install the neard service. [README.md](https://github.com/solutions-crypto/nearcore-autocompile/blob/main/README.md)
 ```bash
 wget https://raw.githubusercontent.com/crypto-guys/near-guildnet/main/nearcore/install/install.sh
 chmod +x install.sh
@@ -103,16 +101,12 @@ sudo systemctl enable neard.service
 Start, Stop, Get Status 
 ```bash
 sudo systemctl start neard.service
-
 sudo systemctl stop neard.service
-
 sudo systemctl status neard.service
 ```
-
 - **Logging**
 
 **Please note:** By default logs go to the system journal 
- 
 - You can modify the loggin behaviour using this file /usr/lib/systemd/journald.conf.d/neard.conf 
 
 - To output logs to a file. Edit this file it has instructions... /etc/systemd/system/neard.service  
@@ -124,6 +118,10 @@ sudo journalctl -x -u neard
 - Get all logs(-a) for neard unit(-u)
 ```bash
 sudo journalctl -a -u neard
+```
+- Follow the sysetm log
+```bash
+sudo journalctl -f
 ```
 - For more information on using journalctl
 ```bash
@@ -139,15 +137,6 @@ Take note of the **validator public_key**
 ```json
     "public_key": "ed25519:**TAKE-NOTE-OF-THIS**"
 ```
-
-If you have completed the compile and install insructions you can skip to 
-
-
-
-
-
-
-
 
 ## Create a wallet on GuildNet
 *On your personal machine:*
@@ -181,13 +170,12 @@ npm -v
 
 ```
 
-### Install the guild's near-cli
-```bash
-git clone https://github.com/crypto-guys/near-cli.git 
-cd near-cli/
-npm install
-sudo npm install -g
-```
+### Install near-cli (there is no need for modified near-cli now)
+
+- This should install the latest version
+npm install -g near-cli
+
+
 ## Setting up your environment
 To use the guildnet network you need to update the environment via the command line.  
 Open a command prompt and run
