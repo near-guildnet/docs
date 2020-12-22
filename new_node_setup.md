@@ -68,22 +68,25 @@ nearup guildnet --nodocker
 
 ### Option 2 - Compile from source and Use Systemd
 
-- **Step 1** Compile the code - Install The Service
+- **Step 1** Compile the code and Install The Service 
+
+This bash script will automatically compile nearcore and install the service. [README.md](https://github.com/solutions-crypto/nearcore-autocompile/blob/main/README.md)
 ```
 wget https://raw.githubusercontent.com/crypto-guys/near-guildnet/main/nearcore/install/install.sh
+
 chmod +x install.sh
+
 sudo ./install.sh
 ```
 - **Systemd Usage**
 
 - Enabling the service on boot
-```
+```bash
 sudo systemctl enable neard.service
-sudo systemctl disable neard.service
 ```
 
 - Start, Stop, Get Status 
-```
+```bash
 sudo systemctl start neard.service
 
 sudo systemctl stop neard.service
@@ -95,17 +98,19 @@ sudo systemctl status neard.service
 - This is controlled by the file /usr/lib/systemd/journald.conf.d/neard.conf 
 
 To output logs to the specified file and append data uncomment this line from /usr/lib/systemd/neard.service  
-```
+```bash
 #StandardOutput=append:/var/log/guildnet.log
 ```
 
 - Check the logs
-```
+```bash
 sudo journalctl -x -u neard
 ```
 For more information on using journalctl use this command 
 
-```journalctl --help```
+```bash
+journalctl --help
+```
 
 ## Verify your install
 
