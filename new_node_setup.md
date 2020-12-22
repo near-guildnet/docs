@@ -65,53 +65,6 @@ We recommand to use Officially Compiled Binary to launch a validator node, which
 nearup guildnet --nodocker
 
 ```
-
-### Option 2 - Compile from source and Use Systemd
-
-- **Step 1** Compile the code and Install The Service 
-
-This bash script will automatically compile nearcore and install the service. [README.md](https://github.com/solutions-crypto/nearcore-autocompile/blob/main/README.md)
-```
-wget https://raw.githubusercontent.com/crypto-guys/near-guildnet/main/nearcore/install/install.sh
-
-chmod +x install.sh
-
-sudo ./install.sh
-```
-- **Systemd Usage**
-
-- Enabling the service on boot
-```bash
-sudo systemctl enable neard.service
-```
-
-- Start, Stop, Get Status 
-```bash
-sudo systemctl start neard.service
-
-sudo systemctl stop neard.service
-
-sudo systemctl status neard.service
-```
-- Check the validators log. 
-- **Please note:** By default logs go to the system journal 
-- This is controlled by the file /usr/lib/systemd/journald.conf.d/neard.conf 
-
-To output logs to the specified file and append data uncomment this line from /usr/lib/systemd/neard.service  
-```bash
-#StandardOutput=append:/var/log/guildnet.log
-```
-
-- Check the logs
-```bash
-sudo journalctl -x -u neard
-```
-For more information on using journalctl use this command 
-
-```bash
-journalctl --help
-```
-
 ## Verify your install
 
 Check validator_key.json is generated for staking pool.
@@ -124,12 +77,77 @@ Take note of the **validator public_key**
 ```json
     "public_key": "ed25519:**TAKE-NOTE-OF-THIS**"
 ```
-
-
 Check running status of validator node. If "V/" is showning up, your pool is selected in current validators list.
 ```bash
 nearup logs -f
 ```
+
+### Option 2 - Compile from source and Use Systemd
+
+- **First: Compile the code and Install The Service **
+
+This bash script will automatically compile nearcore and install the service. [README.md](https://github.com/solutions-crypto/nearcore-autocompile/blob/main/README.md)
+```bash
+wget https://raw.githubusercontent.com/crypto-guys/near-guildnet/main/nearcore/install/install.sh
+chmod +x install.sh
+sudo ./install.sh
+```
+
+- **Systemd Usage**
+
+Enabling the service on boot
+```bash
+sudo systemctl enable neard.service
+```
+
+Start, Stop, Get Status 
+```bash
+sudo systemctl start neard.service
+
+sudo systemctl stop neard.service
+
+sudo systemctl status neard.service
+```
+
+- **Logging**
+
+**Please note:** By default logs go to the system journal 
+ 
+- You can modify the loggin behaviour using this file /usr/lib/systemd/journald.conf.d/neard.conf 
+
+- To output logs to a file. Edit this file it has instructions... /etc/systemd/system/neard.service  
+
+- Get extended logs(-x) for the neard unit(-u).
+```bash
+sudo journalctl -x -u neard
+```
+- Get all logs(-a) for neard unit(-u)
+```bash
+sudo journalctl -a -u neard
+```
+- For more information on using journalctl
+```bash
+journalctl --help
+```
+Check validator_key.json is generated for staking pool.
+```bash
+ls /home/neard/.near/guildnet
+validator_key.json  node_key.json  config.json  data  genesis.json
+cat  /home/neard/.near/guildnet/validator_key.json | grep public_key
+```
+Take note of the **validator public_key** 
+```json
+    "public_key": "ed25519:**TAKE-NOTE-OF-THIS**"
+```
+
+If you have completed the compile and install insructions you can skip to 
+
+
+
+
+
+
+
 
 ## Create a wallet on GuildNet
 *On your personal machine:*
