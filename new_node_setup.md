@@ -162,19 +162,20 @@ PATH="$PATH"
 ```
 
 #### Check Node.js and npm version  
+
 ```bash
 node -v
     v14.X.X
 npm -v
     6.14.8
-
 ```
 
-### Install near-cli (there is no need for modified near-cli now)
+### Install near-cli 
 
 - This should install the latest version
+```bash
 npm install -g near-cli
-
+```
 
 ## Setting up your environment
 To use the guildnet network you need to update the environment via the command line.  
