@@ -172,7 +172,7 @@ npm -v
 
 ### Install near-cli 
 
-- This should install the latest version
+- This should work until I finish testing instructions (will install the main near-cli from near)
 ```bash
 npm install -g near-cli
 ```
