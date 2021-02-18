@@ -12,6 +12,7 @@ We'd appreciate your contribution and feedback on this guide.
 7.  [Create Staking Pool](#Create-your-staking-pool)
 8. [Delegate Tokens](#Delegate-tokens-and-get-rewards)  
 9. [Monitor Validator Status](#Monitor-validator-node-status)
+10. [Running as a docker container](#Running-as-a-docker-container)
 
 
 ## Server Requirements
@@ -270,3 +271,9 @@ near validators next | grep testpool.stake.guildnet
 near validators current | grep "seat price"
 ```
 If your stake is not enough to get a seat, please participate in the following challenges to get more tokens. (Coming Soon...)
+
+## Running as a docker container
+Alternative: If you can't install or compile guildnet's nearup in your server, 
+this is a link to a gist with the commands needed to create a guildnet node image and run it inside a docker container
+
+[run Open Shards Alliance nearup guildnet in a docker container](https://gist.github.com/luciotato/6231f961a3ee33204aa16f49d4fc0456)
