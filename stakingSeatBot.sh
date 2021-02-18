@@ -1,15 +1,12 @@
 #!/bin/bash
-
-# This script will manage your validators stake.
-
-
 #####################################################
 #  This script helps manage your validators stake.  #
 #                                                   #
 #                  SETTINGS                         #
 #                                                   #
 #####################################################
-# Only guildnet has been tested
+# NOTE: Only guildnet has been tested
+#-------------------------
 NETWORK="guildnet"
 # Example "beastake.stake.guildnet" 
 POOL_ID="pool.stake.guildnet"
@@ -25,6 +22,8 @@ ALERT_MISSING_BLOCKS=10
 SEAT_PRICE_BUFFER=20000
 # Enable More Verbose Output
 DEBUG_MIN=0
+#-------------------------
+# Do not change below this line
 
 # Epoch Lengths
 GUILDNET_EPOCH_LEN=5000
@@ -32,7 +31,7 @@ BETANET_EPOCH_LEN=10000
 TESTNET_EPOCH_LEN=43200
 MAINET_EPOCH_LEN=43200
 
-# Additional Script Configuration Don't Change
+# Additional Script Configuration
 ADD0=000000000000000000000000
 COMMA=","
 #DOUBLE_QUOTE="\""
