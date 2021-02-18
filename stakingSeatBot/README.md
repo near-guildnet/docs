@@ -10,12 +10,12 @@
 
 ## Installing
 
-* This will download the script and make it execuateble
+* This will create a folder, downlaod, make the script executable, and copy to /usr/local/bin 
 
 ```
-wget https://raw.githubusercontent.com/solutions-crypto/near-guildnet-tools/main/staking-bot/stakingSeatBot.sh
-chmod +x stakingSeatBot.sh
-sudo cp stakingSeatBot.sh /usr/local/bin/stakingSeatBot.sh
+mkdir -p /home/"$USER"/staking-bot && cd staking-bot
+wget https://raw.githubusercontent.com/near-guildnet/docs/main/staking-bot/stakingSeatBot.sh
+chmod +x stakingSeatBot.sh && sudo cp stakingSeatBot.sh /usr/local/bin/stakingSeatBot
 ```
 
 * Install near-cli this is how I do it your procedures may differ. If you already have a working near-cli do not change it
@@ -133,6 +133,10 @@ SEAT_PRICE_BUFFER=5000
 To run every 5 minutes and output to a logfile
 ```
 crontab -e
-*/5 * * * * /usr/local/bin/stakingSeatBot.sh >> /full_path_to/stakingBot.log
+*/5 * * * * /usr/local/bin/stakingSeatBot >> /full_path_to/stakingBot.log
 ```
 
+To run one time simply use
+```
+stakingSeatBot
+```
