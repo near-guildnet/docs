@@ -22,7 +22,7 @@ At least 16GB RAM
 At least 100GB SSD (Note: HDD will not work)
 ```  
 
-You'll be working with two machines, a server for the validator node, and your personal machie/monitor machine to install near-cli, create the wallet, monitor and control the validator node.
+You'll be working with two machines, a server for the validator node, and your personal machine/monitor machine to install near-cli, create the wallet, monitor and control the validator node.
 
 ### Ubuntu Prerequisite Installation
 
@@ -50,6 +50,7 @@ sudo apt install python3 git curl snapd
 On the Server: The Prerequisite has python3, git and curl toolset, which have been installed in previous step. please run command prompt.
 
 curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-guildnet/nearup/master/nearup | python3
+
 Nearup automatically adds itself to PATH: restart the terminal, or issue the command: . ~/.profile. On each run, nearup self-updates to the latest version.
 
 - **Step 2. Choose a staking-pool AccountId**
@@ -142,7 +143,7 @@ Take note of the **validator public_key**
 *On your personal machine:*
 You will need a wallet.  
 To create a [guildnet wallet](https://wallet.openshards.io) go to: [https://wallet.openshards.io](https://wallet.openshards.io) be sure to record your wallet address and seed phrase (12 words)  
-_Tip: You may request 75,000 faucet from Near team for staking test._  
+_Tip: You may request 75,000 faucet from the guild team to test staking._  
 
 [GuildNet Faucet](https://near-guildnet.github.io/open-shards-faucet/)
 
