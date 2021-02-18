@@ -1,9 +1,8 @@
 #!/bin/bash
 #####################################################
 #  This script helps manage your validators stake.  #
-#                                                   #
+#    Please edit the following section as needed    #
 #                  SETTINGS                         #
-#                                                   #
 #####################################################
 # NOTE: Only guildnet has been tested
 #-------------------------
