@@ -21,7 +21,7 @@ echo "export NODE_ENV=guildnet" >> ~/.profile
 source ~/.profile
 ```
 
-If you get stuck, give a look to the [troubleshooting page](https://github.com/nearprotocol/stakewars/blob/master/troubleshooting.md), open an issue, or join [near.chat](https://near.chat) on Discord
+If you get stuck, give a look to the [troubleshooting page](https://github.com/nearprotocol/stakewars/blob/master/troubleshooting.md), open an issue, or join [The OSA Discord Server](https://discord.com/invite/t9Kgbvf) 
 
 
 
@@ -59,10 +59,9 @@ The pool above will have 25% of fees (25 numerator, 100 denominator).
 
 ## Manage your deployed staking pool
 
-- **HINT:** Copy/Paste everything after this line into a text editor and use search and replace
+- **HINT:** [Get the raw file](https://raw.githubusercontent.com/near-guildnet/docs/master/Staking_Pool_Cheatsheet.md) and Copy/Paste everything after this line into a text editor and use search and replace
 
-
-Once your pool is deployed, you can issue the commands below
+- Once your pool is deployed, you can issue the commands below
 
 ### Deposit 10k tokens for the account `pool_admin.nearkat`
 ```
