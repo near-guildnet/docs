@@ -13,7 +13,7 @@ export NODE_ENV=guildnet
 
 - To make the change load for every new session
 ```
-echo "export NODE_ENV=guildnet" > ~/.profile 
+echo "export NODE_ENV=guildnet" >> ~/.profile 
 ```
 
 - To make the change immediate use
