@@ -13,7 +13,7 @@
 * This will create a folder, downlaod, make the script executable, and copy to /usr/local/bin 
 
 ```
-mkdir -p /home/"$USER"/staking-bot && cd staking-bot
+mkdir -p /home/"$USER"/staking-bot && cd /home/"$USER"/staking-bot
 wget https://raw.githubusercontent.com/near-guildnet/docs/main/staking-bot/stakingSeatBot.sh
 chmod +x stakingSeatBot.sh && sudo cp stakingSeatBot.sh /usr/local/bin/stakingSeatBot
 ```
