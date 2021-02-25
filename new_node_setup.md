@@ -86,11 +86,26 @@ nearup logs -f
 
 ## Installation Option 2 - Compile from source and Use Systemd
 
-This bash script will automatically compile nearcore and install the neard service. [README.md](https://github.com/solutions-crypto/nearcore-autocompile/blob/main/README.md)
+This bash script will automatically compile the binary files for prometheus node exporter, near node exporter and neard. and install the neard service. [README.md](https://github.com/solutions-crypto/near-guildnet-tools)
 ```bash
-wget https://raw.githubusercontent.com/crypto-guys/near-guildnet/main/nearcore/install/install.sh
-chmod +x install.sh
-sudo ./install.sh
+cd $HOME
+git clone https://github.com/solutions-crypto/near-guildnet-tools.git
+sudo /home/$USER/near-guildnet-tools/nearcore-autocompiler/.compiler.sh
+```
+This script will install the binary files as system services and create an account for the services to use.
+```bash
+sudo /home/$USER/near-guildnet-tools/nearcore-service-setup/install-neard.sh
+```
+
+If you need to start over use the clean_up script it will delete everything so you can start over it will not clean up the install.
+```
+sudo /home/$USER/near-guildnet-tools/nearcore-autocompiler/clean_up.sh
+```
+
+When finished this will remove the container, lxd, and any tmp files.
+```
+sudo snap remove lxd --purge
+sudo rm -rf /tmp/binaries
 ```
 
 - **Systemd Usage**
