@@ -124,7 +124,7 @@ sudo systemctl status neard.service
 - **Logging**
 
 **Please note:** By default logs go to the system journal 
-- You can modify the loggin behaviour 
+- You can modify the logging behaviour per service
 ```
 sudo cp /etc/systemd/journald.conf /etc/systemd/journald.conf.d/neard.conf
 sudo nano /etc/systemd/journald.conf.d/neard.conf
