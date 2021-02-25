@@ -124,10 +124,16 @@ sudo systemctl status neard.service
 - **Logging**
 
 **Please note:** By default logs go to the system journal 
-- You can modify the loggin behaviour using this file /usr/lib/systemd/journald.conf.d/neard.conf 
+- You can modify the loggin behaviour 
+```
+sudo cp /etc/systemd/journald.conf /etc/systemd/journald.conf.d/neard.conf
+sudo nano /etc/systemd/journald.conf.d/neard.conf
+```
 
-- To output logs to a file. Edit this file it has instructions... /etc/systemd/system/neard.service  
-
+- To output logs to a file. Edit this file
+```bash
+sudo nano /home/neard/services/neard.service  
+```
 - Get extended logs(-x) for the neard unit(-u).
 ```bash
 sudo journalctl -x -u neard
@@ -144,12 +150,14 @@ sudo journalctl -f
 ```bash
 journalctl --help
 ```
+
 Check validator_key.json is generated for staking pool.
 ```bash
 ls /home/neard/.near/guildnet
 validator_key.json  node_key.json  config.json  data  genesis.json
 cat  /home/neard/.near/guildnet/validator_key.json | grep public_key
 ```
+
 Take note of the **validator public_key** 
 ```json
     "public_key": "ed25519:**TAKE-NOTE-OF-THIS**"
