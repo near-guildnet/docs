@@ -1,36 +1,42 @@
 #!/bin/bash
-#####################################################
-#  This script helps manage your validators stake.  #
-#    Please edit the following section as needed    #
-#                  SETTINGS                         #
-#####################################################
-# NOTE: Only guildnet has been tested
-#-------------------------
+
+# This script will manage your validators stake.
+#############################################
+#                                           #
+#  Enter your information in this section   #
+#              # SETTINGS                   #
+#############################################
+# Only guildnet has been tested
 NETWORK="guildnet"
-# Example "beastake.stake.guildnet" 
+
+# Example "beastake.stake.guildnet"
 POOL_ID="pool.stake.guildnet"
-ACCOUNT_ID="account.guildnet"
-# Enter a NUMBER 
+ACCOUNT_ID="accounId.guildnet"
+
+# Enter a NUMBER
 NUM_SEATS_TO_OCCUPY=1
+
 # Set Enable Email to 1 to enable email notifications and fill in the blanks
 ENABLE_EMAIL=0
-FROM_ADDRESS=admin@crypto-solutions.net
-TO_ADDRESS=notifications@crypto-solutions.net
+FROM_ADDRESS=<ENTER THE ACCOUNT AUTHORIZED TO SEND MAIL>
+TO_ADDRESS=notifications@yourdomain.net
+
 # Number of missed blocks before an email is sent
 ALERT_MISSING_BLOCKS=10
 SEAT_PRICE_BUFFER=20000
+
 # Enable More Verbose Output
 DEBUG_MIN=0
-#-------------------------
-# Do not change below this line
-
+-----------------------------------------------------------------
+# NO MORE USER SETTINGS
+-----------------------------------------------------------------
 # Epoch Lengths
 GUILDNET_EPOCH_LEN=5000
 BETANET_EPOCH_LEN=10000
 TESTNET_EPOCH_LEN=43200
 MAINET_EPOCH_LEN=43200
 
-# Additional Script Configuration
+# Additional Script Configuration Don't Change
 ADD0=000000000000000000000000
 COMMA=","
 #DOUBLE_QUOTE="\""
@@ -384,6 +390,10 @@ fi
 
 
 # Stake is more than the Seat Price
+STAKED_BALANCE=$(near view stakeu.stake.guildnet get_account_staked_balance '{"account_id": "imstaked.guildnet"}' | tail -n 1)
+STAKED_BALANCE=$(echo $STAKED_BALANCE | sed 's/[^0-9]*//g')
+STAKED_BALANCE=${STAKED_BALANCE%????????????????????????}
+
 if [[ "$PROPOSAL_STAKE" -gt "$SEAT_PRICE_PROPOSALS" ]]
 then
     SEAT_PRICE_DIFF=$((PROPOSAL_STAKE - SEAT_PRICE_PROPOSALS))
@@ -399,11 +409,16 @@ then
     NEW_PROPOSAL_NUMBERS=$(echo $SEAT_PRICE_DIFF | sed 's/[^0-9]*//g')
     if [[ "$NEW_PROPOSAL_NUMBERS" -gt 10000 ]]
     then
-        AMOUNT=\"$NEW_PROPOSAL_NUMBERS$ADD0\"
+      AMOUNT=\"$NEW_PROPOSAL_NUMBERS$ADD0\"
+      if [[ "$STAKED_BALANCE" -gt "$AMOUNT"]]
+      then
         echo "Decreasing stake by: ${AMOUNT}"
         unstake "$AMOUNT"
+      else
+        echo "Amount to unstake ("$AMOUNT") is greater than the staked balance ("$STAKED_BALANCE") doing nothing."
+      fi
     else
-        echo "The seat price difference of: $NEW_PROPOSAL_NUMBERS is not enough to trigger a transaction"
+      echo "The seat price difference of: $NEW_PROPOSAL_NUMBERS is not sufficent to trigger a transaction"
     fi
 fi
 
@@ -417,3 +432,4 @@ fi
 echo "Script Done"
 echo "----------- "
 echo " "
+
