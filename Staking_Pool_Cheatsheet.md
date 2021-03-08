@@ -8,7 +8,7 @@ Replace `nearkat.stakingpool` with the name of your pool, and `pool_admin.nearka
 
 If you get stuck, give a look to the [troubleshooting page](https://github.com/nearprotocol/stakewars/blob/master/troubleshooting.md), open an issue, or join [near.chat](https://near.chat) on Discord
 
-## Configure your Environment for guildnet
+# Configure your Environment for guildnet
 
 - REQUIRED: To send commands to the guildnet network 
 ```
@@ -20,7 +20,7 @@ source ~/.profile
 export NODE_ENV=testnet 
 ```
 
-## Deploy a staking pool using the staking pool factory
+# Deploy a staking pool using the staking pool factory
 
 This uses the [staking pool factory](https://github.com/near/core-contracts/tree/master/staking-pool-factory) to deploy a staking pool. On the guildnet network you are free to deploy your own contracts if you choose. All pools deployed with this method on guildnet will end with the `.stake.guildnet` suffix.
 
@@ -38,7 +38,7 @@ From the example above, you have to replace:
 - `pool_admin.nearkat` in the --accountId with your pool admin account
 - be sure to have `30` NEAR available in your account (**HEADS UP:** keep the minimum balance to pay the [storage stake](https://near.org/papers/the-official-near-white-paper/#economics))
 
-#### Alternative Method: deploy a custom staking pool, using your locally-compiled contract
+##  Deploying a custom staking pool using your locally-compiled contract
 This method allows you to run your own fork of the [staking pool](https://github.com/near/core-contracts/tree/master/staking-pool).
 
 - Deploy the smart contract in the account `my_cool_pool.nearkat`
@@ -47,7 +47,8 @@ This method allows you to run your own fork of the [staking pool](https://github
 near deploy --accountId=my_cool_pool.nearkat --wasmFile=res/staking_pool_with_shares.wasm
 ```
 
-### Configure the staking pool contract
+
+# Configure your staking pool contract
 (replace `my_cool_pool.nearkat`, `pool_admin.nearkat`, `stake_public_key` and `reward_fee_fraction` accordingly)
 ```
 near call my_cool_pool.nearkat new '{"owner_id": "pool_admin.nearkat", "stake_public_key": "ed25519:00000000000000000000000000000000000000000042", "reward_fee_fraction": {"numerator": 25, "denominator": 100}}' --accountId pool_admin.nearkat
@@ -55,13 +56,13 @@ near call my_cool_pool.nearkat new '{"owner_id": "pool_admin.nearkat", "stake_pu
 The pool above will have 25% of fees (25 numerator, 100 denominator).
 
 
-## Managing your deployed staking pool
+# Manage your staking pool contract
 
 - **HINT:** Copy/Paste everything after this line into a text editor and use search and replace
 
 Once your pool is deployed, you can issue the commands below
 
-# Owner
+## Owner Info
 
 - Retrieve the owner ID of the staking pool
 ```
