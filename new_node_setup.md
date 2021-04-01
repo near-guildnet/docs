@@ -48,7 +48,8 @@ sudo apt install python3 git curl snapd
 
 - **Step 1.Install Nearup**
 
-On the Server: The Prerequisite has python3, git and curl toolset, which have been installed in previous step. please run command prompt.
+On the Server: The Prerequisite has python3, git and curl toolset, which have been installed in previous step. 
+Run the following commmand.
 
 ```curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-guildnet/nearup/master/nearup | python3```
 
@@ -58,7 +59,8 @@ Nearup automatically adds itself to PATH: restart the terminal, or issue the com
 
 On the first run, nearup will ask you to enter a staking-pool AccountId, please choose a name for your staking-pool AccountId, it must end with ".stake.guildnet", e.g. *MyStakingPool.stake.guildnet*. 
 
-You should go to [https://near-guildnet.github.io/staking-pool-factory](https://near-guildnet.github.io/staking-pool-factory/) to check if the name is available. Don't create your staking-pool contract yet, just check if the name is available.
+You should go to [https://near-guildnet.github.io/staking-pool-factory](https://near-guildnet.github.io/staking-pool-factory/) to check if the name is available. 
+/!\ Don't create your staking-pool contract yet, just check if the name is available. /!\
 
 - **Step 3. Start nearup guildnet**
 
@@ -181,7 +183,7 @@ _note that Node.js version 10+ is required to run NEAR CLI_
 #### Install Node Version 15.x and npm
 Nodes.js and npm can be install by
 ```bash
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
 sudo apt install build-essential nodejs
 PATH="$PATH"
 ```
@@ -190,9 +192,9 @@ PATH="$PATH"
 
 ```bash
 node -v
-    v14.X.X
+    v15.X.X
 npm -v
-    6.14.8
+    7.X.X
 ```
 
 ### Install near-cli 
@@ -299,4 +301,4 @@ If your stake is not enough to get a seat, please participate in the following c
 Alternative: If you can't install or compile guildnet's nearup in your server, 
 this is a link to a gist with the commands needed to create a guildnet node image and run it inside a docker container
 
-[run Open Shards Alliance nearup guildnet in a docker container](https://gist.github.com/luciotato/6231f961a3ee33204aa16f49d4fc0456)
+[Run Open Shards Alliance nearup guildnet in a docker container](https://gist.github.com/luciotato/6231f961a3ee33204aa16f49d4fc0456)
