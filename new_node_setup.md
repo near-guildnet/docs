@@ -50,7 +50,7 @@ sudo apt install python3 git curl snapd
 
 On the Server: The Prerequisite has python3, git and curl toolset, which have been installed in previous step. please run command prompt.
 
-curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-guildnet/nearup/master/nearup | python3
+```curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-guildnet/nearup/master/nearup | python3```
 
 Nearup automatically adds itself to PATH: restart the terminal, or issue the command: . ~/.profile. On each run, nearup self-updates to the latest version.
 
