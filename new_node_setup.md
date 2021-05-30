@@ -166,10 +166,8 @@ Take note of the **validator public_key**
 ## Create a wallet on GuildNet
 *On your personal machine:*
 You will need a wallet.  
-To create a [guildnet wallet](https://wallet.openshards.io) go to: [https://wallet.openshards.io](https://wallet.openshards.io) be sure to record your wallet address and seed phrase (12 words)  
-_Tip: You may request 75,000 faucet from the guild team to test staking._  
-
-[GuildNet Faucet](https://near-guildnet.github.io/open-shards-faucet/)
+1. Create a GuildNet Wallet go to: [https://wallet.openshards.io](https://wallet.openshards.io) be sure to record your wallet address and seed phrase (12 words)  
+2. Request 75,000 GuildNet tokens from the faucet [GuildNet Faucet](https://near-guildnet.github.io/open-shards-faucet/)
 
 ## Install Near-Cli
 *On your personal machine:*
@@ -197,7 +195,6 @@ npm -v
 
 ### Install near-cli 
 
-- This should work until I finish testing instructions (will install the main near-cli from near)
 ```bash
 npm install -g near-cli
 ```
@@ -214,7 +211,7 @@ echo 'export NODE_ENV=guildnet' >> ~/.bashrc
 ```
 
 ## Authorize NEAR-Cli
-To authorize NEAR-Cli access we need to login via the command prompt.
+To authorize NEAR-Cli access to your GuildNet wallet account we need to login via the command prompt.
 ```bash
 near login
 ```
@@ -275,6 +272,11 @@ near call <validator pool ID> ping '{}' --accountId <main account ID>
 example:
 near call testpool.stake.guildnet ping '{}' --accountId staketest.guildnet
 ```
+
+## Request additional delegation
+Once the 75K tokens are delegated faucet to the node, additional toekns can be requested for delegation in the [Tokens](https://discord.gg/eUWgRVKjwr) channel on Discord. 
+
+
 ## Monitor validator node status
 To be a validator, you can execute Near-cli to monitor and manager validator pool by your main account.  
   * Check if your pool is in proposals at first.
