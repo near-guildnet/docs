@@ -5,10 +5,10 @@ Welcome to GuildNet! This initiative is completely unrelated with NEAR Foundatio
 
 In practice, it is an additional network called GuildNet, where the genesis block and the faucets are owned by the community members and not the Foundation.
 
-Why a new network?
-1. Stake Wars is oversubscribed, and is difficult to get a seat
-2. We want to manage the faucet differently
-3. Give an opportunity to validators who are kicked out for insufficient stake on BetaNet
+Why another network?
+1. Bootcamp & training ground for validators new to NEAR
+2. Community ran and governed network
+3. Supports dApp dev cycle prior to TestNet
 4. See NEAR sharding in action!
 
 
@@ -16,7 +16,7 @@ Why a new network?
 
 We are using slightly-customized NEAR tooling, to allow them work on GuildNet:
 - [nearcore](https://github.com/near-guildnet/nearcore)
-- [near-cli](https://github.com/near-guildnet/near-cli)
+- [near-cli](https://github.com/near-guildnet/near-cli) - We currently run our own version of NEAR-Cli ( 05/29/21 PR has beent submitted to MaiNet)
 - [nearup](https://github.com/near-guildnet/nearup)
 
 If you plan to run your node (and applications) on GuildNet, keep an eye on these repos!
