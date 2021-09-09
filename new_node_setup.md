@@ -64,7 +64,7 @@ You should go to [https://near-guildnet.github.io/staking-pool-factory](https://
 
 We recommand to use Officially Compiled Binary to launch a validator node, which is suitable to run on VPS. Then, input your staking pool ID in the prompt by this command:
 ```bash
-nearup guildnet --nodocker
+nearup run guildnet
 
 ```
 ## Verify your install
