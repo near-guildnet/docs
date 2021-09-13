@@ -32,6 +32,9 @@ You'll be working with two machines, a server for the validator node, and your p
 ```bash
 sudo apt install python3 git curl
 ```
+```bash
+sudo apt install python3-pip -y
+```
 
 *To use Compile Script and Systemd:*
 ```bash
@@ -44,16 +47,25 @@ sudo apt install python3 git curl snapd
 
 - There are 2 ways to install nearcore currently. You can use Nearup or you can compile the source and use systemd to manage it.
 
-## Installation Option 1 - Use Nearup
+## Installation
+
+
 
 - **Step 1.Install Nearup**
+
+Clear nearup folder
+
+```rm -Rf ~/.nearup```
 
 On the Server: The Prerequisite has python3, git and curl toolset, which have been installed in previous step. 
 Run the following commmand.
 
-```curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-guildnet/nearup/master/nearup | python3```
+```pip3 install --user nearup
+pip3 install --user --upgrade nearup
+USER_BASE_BIN=$(python3 -m site --user-base)/bin
+export PATH="$USER_BASE_BIN:$PATH"```
 
-Nearup automatically adds itself to PATH: restart the terminal, or issue the command: . ~/.profile. On each run, nearup self-updates to the latest version.
+On each run, nearup self-updates to the latest version.
 
 - **Step 2. Choose a staking-pool AccountId**
 
@@ -84,85 +96,6 @@ Take note of the **validator public_key**
 Check running status of validator node. If "V/" is showning up, your pool is selected in current validators list.
 ```bash
 nearup logs -f
-```
-
-## Installation Option 2 - Compile from source and Use Systemd
-
-This bash script will automatically compile the binary files for prometheus node exporter, near node exporter and neard. and install the neard service. [README.md](https://github.com/solutions-crypto/near-guildnet-tools)
-```bash
-cd $HOME
-git clone https://github.com/solutions-crypto/near-guildnet-tools.git
-sudo /home/$USER/near-guildnet-tools/nearcore-autocompiler/.compiler.sh
-```
-This script will install the binary files as system services and create an account for the services to use.
-```bash
-sudo /home/$USER/near-guildnet-tools/nearcore-service-setup/install-neard.sh
-```
-
-If you need to start over use the clean_up script it will delete everything so you can start over it will not clean up the install.
-```
-sudo /home/$USER/near-guildnet-tools/nearcore-autocompiler/clean_up.sh
-```
-
-When finished this will remove the container, lxd, and any tmp files.
-```
-sudo snap remove lxd --purge
-sudo rm -rf /tmp/binaries
-```
-
-- **Systemd Usage**
-
-Enabling the service on boot
-```bash
-sudo systemctl enable neard.service
-```
-
-Start, Stop, Get Status 
-```bash
-sudo systemctl start neard.service
-sudo systemctl stop neard.service
-sudo systemctl status neard.service
-```
-- **Logging**
-
-**Please note:** By default logs go to the system journal 
-- You can modify the logging behaviour per service
-```
-sudo cp /etc/systemd/journald.conf /etc/systemd/journald.conf.d/neard.conf
-sudo nano /etc/systemd/journald.conf.d/neard.conf
-```
-
-- To output logs to a file. Edit this file
-```bash
-sudo nano /home/neard/services/neard.service  
-```
-- Get extended logs(-x) for the neard unit(-u).
-```bash
-sudo journalctl -x -u neard
-```
-- Get all logs(-a) for neard unit(-u)
-```bash
-sudo journalctl -a -u neard
-```
-- Follow the sysetm log
-```bash
-sudo journalctl -f
-```
-- For more information on using journalctl
-```bash
-journalctl --help
-```
-
-Check validator_key.json is generated for staking pool.
-```bash
-ls /home/neard/.near/guildnet
-validator_key.json  node_key.json  config.json  data  genesis.json
-cat  /home/neard/.near/guildnet/validator_key.json | grep public_key
-```
-
-Take note of the **validator public_key** 
-```json
-    "public_key": "ed25519:**TAKE-NOTE-OF-THIS**"
 ```
 
 ## Create a wallet on GuildNet
@@ -300,7 +233,4 @@ near validators current | grep "seat price"
 If your stake is not enough to get a seat, please participate in the following challenges to get more tokens. (Coming Soon...)
 
 ## Running as a docker container
-Alternative: If you can't install or compile guildnet's nearup in your server, 
-this is a link to a gist with the commands needed to create a guildnet node image and run it inside a docker container
-
-[Run Open Shards Alliance nearup guildnet in a docker container](https://gist.github.com/luciotato/6231f961a3ee33204aa16f49d4fc0456)
+We are working on it
