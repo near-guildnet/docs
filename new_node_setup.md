@@ -47,7 +47,7 @@ sudo apt install python3 git curl snapd
 
 - There are 2 ways to install nearcore currently. You can use Nearup or you can compile the source and use systemd to manage it.
 
-## Installation Option 1 - Use Nearup
+## Installation
 
 
 
@@ -96,62 +96,6 @@ Take note of the **validator public_key**
 Check running status of validator node. If "V/" is showning up, your pool is selected in current validators list.
 ```bash
 nearup logs -f
-```
-
-## Installation Option 2 - Compile from source and Use Systemd
-
-This bash script will automatically compile the binary files for prometheus node exporter, near node exporter and neard. and install the neard service. [README.md](https://github.com/solutions-crypto/near-guildnet-tools)
-```bash
-cd $HOME
-git clone https://github.com/solutions-crypto/near-guildnet-tools.git
-sudo /home/$USER/near-guildnet-tools/nearcore-autocompiler/.compiler.sh
-```
-This script will install the binary files as system services and create an account for the services to use.
-```bash
-sudo /home/$USER/near-guildnet-tools/nearcore-service-setup/install-neard.sh
-```
-
-If you need to start over use the clean_up script it will delete everything so you can start over it will not clean up the install.
-```
-sudo /home/$USER/near-guildnet-tools/nearcore-autocompiler/clean_up.sh
-```
-
-When finished this will remove the container, lxd, and any tmp files.
-```
-sudo snap remove lxd --purge
-sudo rm -rf /tmp/binaries
-```
-
-- **Systemd Usage**
-
-Enabling the service on boot
-```bash
-sudo systemctl enable neard.service
-```
-
-Start, Stop, Get Status 
-```bash
-sudo systemctl start neard.service
-sudo systemctl stop neard.service
-sudo systemctl status neard.service
-```
-- **Logging**
-
-- Check logs by running the following command
-```bash
-nearup logs --follow
-```
-
-Check validator_key.json is generated for staking pool.
-```bash
-ls /home/neard/.near/guildnet
-validator_key.json  node_key.json  config.json  data  genesis.json
-cat  /home/neard/.near/guildnet/validator_key.json | grep public_key
-```
-
-Take note of the **validator public_key** 
-```json
-    "public_key": "ed25519:**TAKE-NOTE-OF-THIS**"
 ```
 
 ## Create a wallet on GuildNet
