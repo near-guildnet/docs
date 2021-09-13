@@ -32,6 +32,9 @@ You'll be working with two machines, a server for the validator node, and your p
 ```bash
 sudo apt install python3 git curl
 ```
+```bash
+sudo apt install python3-pip -y
+```
 
 *To use Compile Script and Systemd:*
 ```bash
@@ -46,14 +49,23 @@ sudo apt install python3 git curl snapd
 
 ## Installation Option 1 - Use Nearup
 
+
+
 - **Step 1.Install Nearup**
+
+Clear nearup folder
+
+```rm -Rf ~/.nearup```
 
 On the Server: The Prerequisite has python3, git and curl toolset, which have been installed in previous step. 
 Run the following commmand.
 
-```curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/near-guildnet/nearup/master/nearup | python3```
+```pip3 install --user nearup
+pip3 install --user --upgrade nearup
+USER_BASE_BIN=$(python3 -m site --user-base)/bin
+export PATH="$USER_BASE_BIN:$PATH"```
 
-Nearup automatically adds itself to PATH: restart the terminal, or issue the command: . ~/.profile. On each run, nearup self-updates to the latest version.
+On each run, nearup self-updates to the latest version.
 
 - **Step 2. Choose a staking-pool AccountId**
 
@@ -125,32 +137,9 @@ sudo systemctl status neard.service
 ```
 - **Logging**
 
-**Please note:** By default logs go to the system journal 
-- You can modify the logging behaviour per service
-```
-sudo cp /etc/systemd/journald.conf /etc/systemd/journald.conf.d/neard.conf
-sudo nano /etc/systemd/journald.conf.d/neard.conf
-```
-
-- To output logs to a file. Edit this file
+- Check logs by running the following command
 ```bash
-sudo nano /home/neard/services/neard.service  
-```
-- Get extended logs(-x) for the neard unit(-u).
-```bash
-sudo journalctl -x -u neard
-```
-- Get all logs(-a) for neard unit(-u)
-```bash
-sudo journalctl -a -u neard
-```
-- Follow the sysetm log
-```bash
-sudo journalctl -f
-```
-- For more information on using journalctl
-```bash
-journalctl --help
+nearup logs --follow
 ```
 
 Check validator_key.json is generated for staking pool.
@@ -300,7 +289,4 @@ near validators current | grep "seat price"
 If your stake is not enough to get a seat, please participate in the following challenges to get more tokens. (Coming Soon...)
 
 ## Running as a docker container
-Alternative: If you can't install or compile guildnet's nearup in your server, 
-this is a link to a gist with the commands needed to create a guildnet node image and run it inside a docker container
-
-[Run Open Shards Alliance nearup guildnet in a docker container](https://gist.github.com/luciotato/6231f961a3ee33204aa16f49d4fc0456)
+We are working on it
